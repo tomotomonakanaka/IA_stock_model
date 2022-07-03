@@ -14,10 +14,10 @@ df_company = df_company.reset_index()
 df_company = df_company.rename(columns={'コード':'code', '銘柄名':'name', '市場・商品区分':'market', '33業種区分':'cat33', '17業種区分':'cat17', '規模区分':'scale'})
 df_company = df_company[['code','name', 'market', 'cat33', 'cat17', 'scale']]
 df_company = df_company[df_company['scale'].str.contains('TOPIX')]
-df_company = df_company[~df_company['scale'].str.contains('TOPIX Small')]
+# df_company = df_company[~df_company['scale'].str.contains('TOPIX Small')]
 
 # 企業の株価時系列
-code_ids = df_company.code.to_numpy()
+code_ids = df_company.code.unique()
 closes_dict = {}
 for code_id in code_ids:
     print(code_id)
@@ -29,8 +29,8 @@ for code_id in code_ids:
     closes = []
     for i in range(0, 23):
         for j in range(1, 12):
-            date_20 = '20{:02}-{:02}-20'.format(i, j)
-            closes_exist = df_id[df_id.Date<=date_20].Close.to_numpy()
+            date_1 = '20{:02}-{:02}-01'.format(i, j)
+            closes_exist = df_id[df_id.Date<=date_1].Close.to_numpy()
             if len(closes_exist) == 0:
                 closes.append(None)
             else:
@@ -47,8 +47,8 @@ for code_id in ['^N225', 'USDJPY=X', 'CL=F', '^TNX']:
     closes = []
     for i in range(0, 23):
         for j in range(1, 12):
-            date_20 = '20{:02}-{:02}-20'.format(i, j)
-            closes_exist = df_id[df_id.Date<=date_20].Close.to_numpy()
+            date_1 = '20{:02}-{:02}-01'.format(i, j)
+            closes_exist = df_id[df_id.Date<=date_1].Close.to_numpy()
             if len(closes_exist) == 0:
                 closes.append(None)
             else:
