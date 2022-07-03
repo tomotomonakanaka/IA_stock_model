@@ -30,7 +30,7 @@ for code_id in code_ids:
     for i in range(0, 23):
         for j in range(1, 12):
             date_1 = '20{:02}-{:02}-01'.format(i, j)
-            closes_exist = df_id[df_id.Date<=date_1].Close.to_numpy()
+            closes_exist = df_id[df_id.Date<=date_1]['Adj Close'].to_numpy()
             if len(closes_exist) == 0:
                 closes.append(None)
             else:
@@ -48,7 +48,7 @@ for code_id in ['^N225', 'USDJPY=X', 'CL=F', '^TNX']:
     for i in range(0, 23):
         for j in range(1, 12):
             date_1 = '20{:02}-{:02}-01'.format(i, j)
-            closes_exist = df_id[df_id.Date<=date_1].Close.to_numpy()
+            closes_exist = df_id[df_id.Date<=date_1]['Adj Close'].to_numpy()
             if len(closes_exist) == 0:
                 closes.append(None)
             else:
